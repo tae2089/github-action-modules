@@ -1,0 +1,23 @@
+name: 'Release Notification'
+description: 'OpenSource Release Notification'
+inputs:
+  owner:  # id of input
+    description: 'github repository owner'
+    required: true
+    default: 'tae2089'
+  repo:
+    description: 'github repository name'
+    required: true
+    default: 'release-noti' 
+  token:
+    description: 'Github Token'
+    required: false
+    default:  ${{ secrets.GITHUB_TOKEN }}
+outputs:
+  url:
+    description: 'Repository Release URL'
+  tag:
+    description: 'Repository Release Tag'
+runs:
+  using: 'node20'
+  main: '../../dist/release-noti/index.js'

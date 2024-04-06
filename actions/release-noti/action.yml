@@ -18,6 +18,8 @@ outputs:
     description: "Repository Release URL"
   tag:
     description: "Repository Release Tag"
+  err:
+    description: "Error Message"
 runs:
   using: "node20"
   main: "../../dist/release-noti/index.js"

@@ -85,6 +85,14 @@ runs:
     - name: Set up Docker Buildx
       uses: docker/setup-buildx-action@v3
 
+    - name: Generate Tag
+      id: generate-tag
+      uses: ./actions/generate-tag
+      with:
+        tag: ${{ inputs.tag }}
+        length: ${{ inputs.length }}
+        prefix: ${{ inputs.prefix }}
+
     - name: Build and Push Docker Image
       uses: docker/build-push-action@v3
       with:
@@ -92,7 +100,7 @@ runs:
         context: .
         file: ${{ inputs.docker-path }}
         push: true
-        tags: "${{ inputs.registry }}/${{ inputs.repository }}:${{ inputs.tag }}"
+        tags: "${{ inputs.registry }}/${{ inputs.repository }}:${{ steps.generate-tag.outputs.tag }}"
         cache-from: type=gha
         cache-to: type=gha,mode=max
         secrets: ${{ inputs.docker-build-secrets}}

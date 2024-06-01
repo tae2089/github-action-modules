@@ -87,7 +87,7 @@ runs:
 
     - name: Generate Tag
       id: generate-tag
-      uses: ./actions/generate-tag
+      uses: tae2089/github-action-modules/actions/generate-tag
       with:
         tag: ${{ inputs.tag }}
         length: ${{ inputs.length }}

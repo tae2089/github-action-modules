@@ -1,0 +1,101 @@
+name: "Slack Notification"
+description: "Send a slack notification"
+
+inputs:
+  slack-token:
+    description: "The slack token to use"
+    required: true
+  slack-channel-id:
+    description: "The slack channel to use"
+    required: true
+  action-name:
+    description: "The name of the job to use. This includes the service name and build/deployment and environment distinction. ex) Demo server Build Dev"
+    required: true
+
+runs:
+  using: "composite"
+  steps:
+    - name: Notify Slack Success
+      uses: slackapi/slack-github-action@v1.23.0
+      if: success()
+      with:
+        channel-id: ${{ inputs.slack-channel-id }}
+        payload: |
+          {
+            "text": "${{ inputs.action-name }} success :)",
+            "blocks": [
+              {
+                "type": "header",
+                "text": {
+                  "type": "plain_text",
+                  "text": "${{ inputs.action-name }} Success :pepe_thumbs:",
+                  "emoji": true
+                }
+              },
+              {
+                "type": "section",
+                "fields": [
+                  {
+                    "type": "mrkdwn",
+                    "text": "*Project*: ${{ github.event.repository.name }}"
+                  },
+                  {
+                    "type": "mrkdwn",
+                    "text": "*Branch*: ${{ github.ref_name }}"
+                  },
+                  {
+                    "type": "mrkdwn",
+                    "text": "*Author*: ${{ github.event.head_commit.author.name }}"
+                  },
+                  {
+                    "type": "mrkdwn",
+                    "text": "*Action Url*: <${{ github.event.repository.html_url }}/actions/runs/${{ github.run_id }}|${{ github.run_id }}>"
+                  }
+                ]
+              }
+            ]
+          }
+      env:
+        SLACK_BOT_TOKEN: ${{ inputs.slack-token }}
+    - name: Notify Slack Failed
+      uses: slackapi/slack-github-action@v1.23.0
+      if: failure()
+      with:
+        channel-id: ${{ inputs.slack-channel-id }}
+        payload: |
+          {
+            "text": "${{ inputs.action-name }} failed :(",
+            "blocks": [
+              {
+                "type": "header",
+                "text": {
+                  "type": "plain_text",
+                  "text": "${{ inputs.action-name }} Failed :sadpepe:",
+                  "emoji": true
+                }
+              },
+              {
+                "type": "section",
+                "fields": [
+                  {
+                    "type": "mrkdwn",
+                    "text": "*Project*: ${{ github.event.repository.name }}"
+                  },
+                  {
+                    "type": "mrkdwn",
+                    "text": "*Branch*: ${{ github.ref_name }}"
+                  },
+                  {
+                    "type": "mrkdwn",
+                    "text": "*Author*: ${{ github.event.head_commit.author.name }}"
+                  },
+                  {
+                    "type": "mrkdwn",
+                    "text": "*Action Url*: <${{ github.event.repository.html_url }}/actions/runs/${{ github.run_id }}|${{ github.run_id }}>"
+                  }
+                ]
+              }
+            ]
+          }
+      env:
+        SLACK_BOT_TOKEN: ${{ inputs.slack-token }}

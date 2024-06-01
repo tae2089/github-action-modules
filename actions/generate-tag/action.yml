@@ -17,4 +17,4 @@ outputs:
     description: "Docker image Tag"
 runs:
   using: "node20"
-  main: "../../dist/generate-tag/index.js"
+  main: "dist/generate-tag/index.js"

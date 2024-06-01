@@ -22,7 +22,7 @@ function shorten(sha, length) {
 await (async () => {
   try {
     const sha = context.sha;
-    const length = core.getInput("length", { required: true });
+    const length = core.getInput("length", { required: true, parse: parseInt });
     const manualTag = core.getInput("tag", { required: false });
     const prefix = core.getInput("prefix", { required: false });
 
@@ -34,7 +34,7 @@ await (async () => {
     if (manualTag.length > 0) {
       tagParts.push(manualTag);
     } else {
-      tagParts.push(shorten(sha, length));
+      tagParts.push(shorten(sha, parseInt(length)));
     }
 
     const tag = tagParts.join("-");

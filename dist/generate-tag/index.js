@@ -29221,7 +29221,7 @@ function shorten(sha, length) {
 await (async () => {
   try {
     const sha = _actions_github__WEBPACK_IMPORTED_MODULE_1__.context.sha;
-    const length = _actions_core__WEBPACK_IMPORTED_MODULE_0__.getInput("length", { required: true });
+    const length = _actions_core__WEBPACK_IMPORTED_MODULE_0__.getInput("length", { required: true, parse: parseInt });
     const manualTag = _actions_core__WEBPACK_IMPORTED_MODULE_0__.getInput("tag", { required: false });
     const prefix = _actions_core__WEBPACK_IMPORTED_MODULE_0__.getInput("prefix", { required: false });
 
@@ -29233,7 +29233,7 @@ await (async () => {
     if (manualTag.length > 0) {
       tagParts.push(manualTag);
     } else {
-      tagParts.push(shorten(sha, length));
+      tagParts.push(shorten(sha, parseInt(length)));
     }
 
     const tag = tagParts.join("-");

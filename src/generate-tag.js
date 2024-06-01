@@ -1,7 +1,7 @@
 import * as core from "@actions/core";
 import { context } from "@actions/github";
 
-console.log("Doodlin Actions: generate-tag.");
+console.log("Actions: generate-tag.");
 
 function shorten(sha, length) {
   if (!sha) {

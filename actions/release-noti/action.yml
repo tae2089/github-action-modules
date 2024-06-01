@@ -22,4 +22,4 @@ outputs:
     description: "Error Message"
 runs:
   using: "node20"
-  main: "../../dist/release-noti/index.js"
+  main: "dist/release-noti/index.js"

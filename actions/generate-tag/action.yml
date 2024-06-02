@@ -12,9 +12,6 @@ inputs:
     description: "Prefix for the tag"
     default: ""
     required: false
-outputs:
-  tag:
-    description: "Docker image Tag"
 runs:
   using: "node20"
   main: "../../dist/generate-tag/index.js"

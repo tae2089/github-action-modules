@@ -54,7 +54,7 @@ inputs:
     description: "Docker build secrets"
     required: false
     default: ""
-  build-args: # e.g) POETRY_REPOSITORIES_DOODLIN_PYMUPDF_URL=${{ env.DOODLIN_PYMUPDF_REPO_URL }}
+  build-args:
     description: "build arguments to inject python container."
     required: false
     default: ""

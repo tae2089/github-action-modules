@@ -1,0 +1,34 @@
+name: "update tag in deploy"
+description: "Update the tag in the manifest file"
+inputs:
+  # The path to the manifest file
+  token:
+    description: "Github Token"
+    required: true
+    default: ${{ secrets.GITHUB_TOKEN }}
+
+  repository:
+    description: "The repository to update in the manifest file"
+    default: "oh-my-deploy/omd-operator-example"
+    required: true
+
+  branch:
+    description: "The branch to update in the manifest file"
+    required: true
+    default: "main"
+
+  path:
+    description: "The path to the manifest file"
+    required: true
+
+  key:
+    description: "The yaml key path to update in the manifest file"
+    required: true
+
+  value:
+    description: "The value is that tag to update in the manifest file"
+    required: true
+
+runs:
+  using: "node20"
+  main: "../../dist/update-content/index.js"

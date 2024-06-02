@@ -6,7 +6,8 @@
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
     "build:release-noti": "ncc build src/release-noti.js -o dist/release-noti",
-    "build:generate-tag": "ncc build src/generate-tag.js -o dist/generate-tag"
+    "build:generate-tag": "ncc build src/generate-tag.js -o dist/generate-tag",
+    "build:update-content": "ncc build src/update-content.js -o dist/update-content"
   },
   "keywords": [],
   "author": "",
@@ -14,6 +15,7 @@
   "dependencies": {
     "@actions/core": "^1.10.1",
     "@actions/github": "^6.0.0",
-    "axios": "^1.6.8"
+    "axios": "^1.6.8",
+    "js-yaml": "^4.1.0"
   }
 }

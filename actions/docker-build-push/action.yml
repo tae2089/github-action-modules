@@ -59,6 +59,11 @@ inputs:
     required: false
     default: ""
 
+outputs:
+  tag:
+    description: "Generated tag for the Docker image"
+    value: ${{ steps.generate-tag.outputs.tag }}
+
 runs:
   using: "composite"
   steps:

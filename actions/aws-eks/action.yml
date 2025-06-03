@@ -27,6 +27,10 @@ inputs:
     description: "Values name"
     required: false
     default: ""
+  tag:
+    description: "Tag"
+    required: false
+    default: ""
 
 runs:
   using: "composite"
@@ -58,5 +62,5 @@ runs:
       shell: bash
       run: |
         helm upgrade --install -f .helm/${{ inputs.values-name }} \
-          --set images.tag=${{ needs.build.outputs.tag }} \
+          --set images.tag=${{ inputs.tag }} \
           ${{ inputs.deploy-name }} .helm

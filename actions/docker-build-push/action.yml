@@ -58,6 +58,10 @@ inputs:
     description: "build arguments to inject python container."
     required: false
     default: ""
+  platform:
+    description: "platform to build the Docker image"
+    required: false
+    default: "linux/amd64"
 
 outputs:
   tag:
@@ -110,3 +114,4 @@ runs:
         cache-to: type=gha,mode=max
         secrets: ${{ inputs.docker-build-secrets}}
         build-args: ${{ inputs.build-args }}
+        platform: ${{ inputs.platform }}

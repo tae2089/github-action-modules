@@ -15,6 +15,18 @@ inputs:
     description: "Role session name"
     required: false
     default: "github-actions"
+  helm-path:
+    description: "Helm path"
+    required: false
+    default: ""
+  deploy-name:
+    description: "Deploy name"
+    required: false
+    default: ""
+  values-name:
+    description: "Values name"
+    required: false
+    default: ""
 
 runs:
   using: "composite"
@@ -35,3 +47,16 @@ runs:
 
         # 검증
         kubectl config current-context
+    - name: Install Helm Client
+      uses: azure/setup-helm@v3
+      if: ${{ inputs.helm-path != '' }}
+      with:
+        version: v3.8.2
+
+    - name: Helm install
+      if: ${{ inputs.helm-path != '' }}
+      shell: bash
+      run: |
+        helm upgrade --install -f .helm/${{ inputs.values-name }} \
+          --set images.tag=${{ needs.build.outputs.tag }} \
+          ${{ inputs.deploy-name }} .helm
